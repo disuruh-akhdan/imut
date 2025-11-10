@@ -1,9 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-/*
-    ---break---
 
-    */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -151,5 +148,49 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .container-sm {
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 40rem;
+  }
+
+  .container-md {
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 48rem;
+  }
+
+  .container-lg {
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 64rem;
+  }
+
+  .container-xl {
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 80rem;
+  }
+
+  .container-2xl {
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 96rem;
+  }
+
+  .container-full {
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+
+  .container {
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 62.5rem;
   }
 }
