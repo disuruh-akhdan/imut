@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar.component";
 import HeroSection from "../_components/hero.component";
 import KenaliDiriSection from "./kenali-diri.component";
 import BantuanSection from "./bantuan.section";
+import PanduanResiliensiSection from "./panduan-resiliensi.component";
 
 export default function Home() {
   return (
@@ -43,7 +44,10 @@ export default function Home() {
 
       <BantuanSection />
       
+      <PanduanResiliensiSection />]
+      
       <Footer />
+
     </div>
   );
 }
