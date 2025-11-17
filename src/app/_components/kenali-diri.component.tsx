@@ -70,7 +70,7 @@ export default function KenaliDiriSection() {
 
   return (
     <>
-      <section className="w-full py-20 px-4 overflow-hidden relative min-h-screen flex flex-col items-center justify-center">
+      <section className="w-full py-20 px-4 overflow-hidden relative min-h-screen flex flex-col items-center justify-start">
         {/* Header Section */}
         <div className="text-center mb-16 space-y-2.5">
           <h3 className="text-[#4A90C8] text-4xl md:text-3xl font-medium">

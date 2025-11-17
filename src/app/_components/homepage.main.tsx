@@ -4,13 +4,13 @@ import Footer from "@/components/footer.component";
 import Navbar from "@/components/navbar.component";
 import HeroSection from "../_components/hero.component";
 import KenaliDiriSection from "./kenali-diri.component";
-import BantuanSection from "./bantuan.section";
+import BantuanSection from "./bantuan.component";
 import PanduanResiliensiSection from "./panduan-resiliensi.component";
 import MotionTreesBackground from "@/components/ui/motion-tree";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen flex flex-col font-sans overflow-x-hidden">
+    <div className="relative flex flex-col font-sans overflow-x-hidden min-h-screen">
       <div
         className="fixed inset-0 -z-20"
         style={{
@@ -21,38 +21,47 @@ export default function Home() {
 
       <div
         className="
-          pointer-events-none fixed inset-x-0 -top-44 h-[532px] -translate-y-1/2 rounded-full
+          pointer-events-none fixed inset-x-0 -top-44 h-100vh -translate-y-1/2 rounded-full
           bg-[radial-gradient(circle_at_center,#E8EBD6_0,#E8EBD6_40%,transparent_75%)]
           blur-3xl opacity-90 -z-10
         "
         aria-hidden="true"
       />
 
-      <div className="absolute inset-0 w-full pointer-events-none z-0">
+      {/* Motion Trees Background - absolute positioning */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
         <MotionTreesBackground />
       </div>
 
-      <div className="relative z-10 grow w-full flex flex-col">
+      {/* Main content wrapper */}
+      <main className="relative z-10 w-full" style={{ minHeight: "415vh" }}>
         <Navbar />
 
-        <HeroSection />
+        {/* Hero Section - 980px = 90.7vh */}
+        <div style={{ minHeight: "90.7vh" }}>
+          <HeroSection />
+        </div>
 
-        <div className="pt-0 pb-8">
+        {/* Kenali Diri Section - 966px = 89.4vh */}
+        <div style={{ minHeight: "89.4vh" }}>
           <KenaliDiriSection />
         </div>
 
-        <div className="py-8">
+        {/* Bantuan Section - 915px = 84.7vh */}
+        <div style={{ minHeight: "84.7vh" }}>
           <BantuanSection />
         </div>
 
-        <div className="py-8">
+        {/* Pusat Panduan & Resiliensi Section - 1633px = 151.2vh */}
+        <div style={{ minHeight: "151.2vh" }}>
           <PanduanResiliensiSection />
         </div>
-      </div>
+      </main>
 
-      <div className="relative z-20 mt-auto">
+      {/* Footer - always at bottom */}
+      <footer className="relative z-20 w-full">
         <Footer />
-      </div>
-    </main>
+      </footer>
+    </div>
   );
 }

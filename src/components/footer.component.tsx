@@ -46,14 +46,14 @@ export default function Footer() {
       `}</style>
       
      {/* Content */}
-      <div className="relative mx-auto max-w-8xl px-10 lg:px-12 min-h-[400px] flex items-center">
+      <div className="relative px-10 lg:px-12 w-full min-h-[400px] flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-24 lg:gap-8 w-full">
           
           {/* Left */}
           <div className="lg:col-span-2 -mr-4">
             <div className="flex items-start gap-3 mb-4">
               {/* Logo Icon */}
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shrink-0">
                 <div className="w-3 h-3 bg-black rounded-full" />
               </div>
               <h3 className="text-2xl font-bold text-white">Air Berotot</h3>

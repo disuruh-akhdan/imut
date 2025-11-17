@@ -1,67 +1,60 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function MotionTreesBackground() {
+  
   return (
     <div 
-      className="absolute top-[100vh] left-0 right-0 w-full h-[280vh] pointer-events-none"
+      className="relative w-full h-full pointer-events-none"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="absolute inset-x-0 top-[80vh] z-0"
+      {/* Layer 1 - Background paling belakang */}
+      <div
+        className="absolute inset-x-0 z-0"
+        style={{ top: '150vh' }}
       >
-        <div className="relative w-full h-[820px]">
+        <div className="relative w-full h-[840px]">
           <Image
-            src="/parallax-1.svg"
+            src="/layer-1.svg"
             alt=""
             fill
             className="object-cover object-bottom"
             priority
           />
         </div>
-      </motion.div>
+      </div>
       
-      <motion.div
-        initial={{ opacity: 0, y: 120 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.15 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-        className="absolute inset-x-0 top-[45vh] -left-10 z-5"
+      {/* Layer 2 - Middle layer */}
+      <div
+        className="absolute inset-x-0 z-5"
+        style={{ top: '120vh' }}
       >
-        <div className="relative w-full h-[2424px]">
+        <div className="relative w-full h-[2420px]">
           <Image
-            src="/parallax-2.svg"
+            src="/layer-2.svg"
             alt=""
             fill
             className="object-cover object-bottom"
             priority
           />
         </div>
-      </motion.div>
+      </div>
       
-
-      <motion.div
-        initial={{ opacity: 0, y: 150 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.1 }}
-        transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-        className="absolute inset-x-0 top-[200vh] z-10"
+      {/* Layer 3 - Foreground paling depan */}
+      <div
+        className="absolute inset-x-0 z-10"
+        style={{ top: '300vh' }}
       >
-        <div className="relative w-full h-[2424px]">
+        <div className="relative w-full h-[2200px]">
           <Image
-            src="/parallax-3.svg"
+            src="/layer-3.svg"
             alt=""
             fill
             className="object-cover object-bottom"
             priority
           />
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
