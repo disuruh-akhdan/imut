@@ -53,7 +53,7 @@ export default function PanduanResiliensiSection() {
 
   return (
     <section className="w-full py-12 px-4 md:px-12 overflow-hidden relative min-h-screen flex flex-col items-center justify-center">
-      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start py-80">
         <div className="lg:col-span-7 flex flex-col items-center lg:items-stretch">
           {/* Judul Section */}
           <div className="text-center mb-8 text-white drop-shadow-md">
