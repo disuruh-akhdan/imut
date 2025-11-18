@@ -83,22 +83,6 @@ export default function MotionTreesBackground() {
               bottom: "180px",
             }}
           >
-            <video
-              className="w-40 sm:w-[180px] md:w-[200px] lg:w-[220px] xl:w-[240px] h-auto"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="none"
-              style={{
-                filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.15))",
-              }}
-            >
-              <source src="/akhdan-idle.webm" type="video/webm" />
-              <source src="/akhdan-idle.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-
             <div
               className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 
                          w-[100px] sm:w-[120px] md:w-[140px] h-[15px] sm:h-[20px] 
@@ -114,7 +98,7 @@ export default function MotionTreesBackground() {
         style={{
           left: "-2.5%",
           right: "-2.5%",
-          width: "105%", 
+          width: "105%",
           top: "300vh",
           y: layer3Y,
           scale: layer3Scale,

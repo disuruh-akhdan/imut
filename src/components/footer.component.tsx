@@ -16,6 +16,18 @@ export default function Footer() {
         aria-hidden="true"
       />
 
+      <div
+        className="absolute z-10"
+        style={{ top: "30px", left: "30px" }}
+      >
+        <Image
+          src="/kucing.svg"
+          alt="Ilustrasi Kucing"
+          width={130}
+          height={130}
+        />
+      </div>
+
       {/* Responsive positioning */}
       <style jsx>{`
         @media (min-width: 640px) {

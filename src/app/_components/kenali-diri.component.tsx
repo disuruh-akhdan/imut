@@ -89,7 +89,6 @@ export default function KenaliDiriSection() {
               onClick={() => setSelectedItem(item)}
               className="flex flex-col items-center group cursor-pointer transition-transform hover:scale-105"
             >
-              {/* PERBAIKAN DI SINI: Hapus 'pointer-events-none' */}
               <div className="relative w-56 h-56 md:w-64 md:h-64">
                 <TiltedCard
                   imageSrc={item.src}
@@ -171,14 +170,14 @@ export default function KenaliDiriSection() {
                   </p>
                 </div>
 
-                {/* Tombol Action  */}
+                {/* Tombol Action Mobile */}
                 <button className="w-full md:hidden bg-[#6CA5D6] hover:bg-[#5b90bf] text-white font-bold py-3 rounded-lg transition-colors shadow-lg mt-4">
                   {selectedItem.buttonText}
                 </button>
               </div>
 
-              {/* Gambar */}
-              <div className="flex-1 flex flex-col items-center justify-center relative">
+              {/* Gambar: SAYA TAMBAHKAN 'hidden md:flex' AGAR HILANG DI MOBILE */}
+              <div className="hidden md:flex flex-1 flex-col items-center justify-center relative">
                 <div
                   className={`w-70 h-70 rounded-full flex items-center justify-center`}
                 >
@@ -194,8 +193,8 @@ export default function KenaliDiriSection() {
               </div>
             </div>
 
-            {/* Tombol Action */}
-            <div className=" hidden md:block w-full max-w-[48%]">
+            {/* Tombol Action Desktop */}
+            <div className="hidden md:block w-full max-w-[48%]">
               <button className="w-full bg-[#6CA5D6] hover:bg-[#5b90bf] text-white font-bold py-3 rounded-lg transition-colors shadow-lg">
                 {selectedItem.buttonText}
               </button>
