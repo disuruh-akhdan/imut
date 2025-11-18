@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "@/components/navbar.component";
 import Footer from "@/components/footer.component";
-
-// Import components baru
+import LoadingScreen from "@/app/_components/loading-screen";
 import HeaderSection from "./header-component";
 import QuickStatsSection from "./quick-stats.component";
 import CategoryFilterSection from "./category.component";
@@ -15,7 +14,6 @@ import ResourceGuidesSection from "./guide.section";
 import CtaSection from "./cta.component";
 import StoryDetailModal from "./story-detail.component";
 
-// Tipe data untuk props (bisa juga diekspor dari file types)
 export type Story = {
   id: number;
   title: string;
@@ -38,13 +36,12 @@ export type Category = {
 };
 
 export type Guide = {
-  icon: React.ReactNode; // Kita akan pass JSX-nya langsung
+  icon: React.ReactNode;
   title: string;
   desc: string;
   link: string;
 };
 
-// Data (kita simpan di sini agar mudah di-pass sebagai props)
 const categories: Category[] = [
   { id: "semua", label: "Semua Kisah", count: 45 },
   { id: "gempa", label: "Gempa Bumi", count: 12 },
@@ -142,91 +139,109 @@ const inspirationalStories: Story[] = [
 
 
 export default function InformasiPage() {
-  // State tetap hidup di 'page.tsx'
+  const [isLoading, setIsLoading] = useState(true);
+  
   const [selectedStory, setSelectedStory] = useState<number | null>(null);
   const [currentCategory, setCurrentCategory] = useState<string>("semua");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Logika filtering tetap di sini
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const filteredStories = currentCategory === "semua" 
     ? inspirationalStories 
     : inspirationalStories.filter(story => story.category === currentCategory);
 
   return (
-    <div className="relative flex flex-col font-sans overflow-x-hidden min-h-screen">
-      {/* Background gradient */}
+    <>
+      {/* Loading Screen */}
+      {isLoading && (
+        <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
+      )}
+
+      {/* Main Content */}
       <div
-        className="fixed inset-0 -z-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(180deg, #C6E5F7 20%, #E5F2FF 58%, #C6E5F7 95%)",
-        }}
-      />
-      <div
-        className="
-          pointer-events-none fixed inset-x-0 -top-44 h-100vh -translate-y-1/2 rounded-full
-          bg-[radial-gradient(circle_at_center,#E8EBD6_0,#E8EBD6_40%,transparent_75%)]
-          blur-3xl opacity-90 -z-10
-        "
-        aria-hidden="true"
-      />
-
-      {/* Decorative clouds */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <Image
-          src="/cloud.svg"
-          alt="Awan"
-          width={700}
-          height={250}
-          className="absolute top-32 -left-52 w-[600px] lg:w-[700px] h-auto opacity-20"
+        className={`
+          relative flex flex-col font-sans overflow-x-hidden min-h-screen
+          transition-opacity duration-500
+          ${isLoading ? "opacity-0" : "opacity-100"}
+        `}
+      >
+        <div
+          className="fixed inset-0 -z-20"
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, #C6E5F7 20%, #E5F2FF 58%, #C6E5F7 95%)",
+          }}
         />
-        <Image
-          src="/cloud.svg"
-          alt="Awan"
-          width={800}
-          height={300}
-          className="absolute top-64 -right-48 w-[700px] lg:w-[800px] h-auto opacity-25"
-        />
-      </div>
-
-      <main className="relative z-10 w-full">
-        <Navbar />
-
-        {/* --- PANGGIL KOMPONEN SECTION --- */}
-        
-        <HeaderSection />
-
-        <QuickStatsSection />
-
-        <CategoryFilterSection
-          categories={categories}
-          currentCategory={currentCategory}
-          setCurrentCategory={setCurrentCategory}
+        <div
+          className="
+            pointer-events-none fixed inset-x-0 -top-44 h-100vh -translate-y-1/2 rounded-full
+            bg-[radial-gradient(circle_at_center,#E8EBD6_0,#E8EBD6_40%,transparent_75%)]
+            blur-3xl opacity-90 -z-10
+          "
+          aria-hidden="true"
         />
 
-        <StoriesGridSection
-          stories={filteredStories}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <Image
+            src="/cloud.svg"
+            alt="Awan"
+            width={700}
+            height={250}
+            className="absolute top-32 -left-52 w-[600px] lg:w-[700px] h-auto opacity-20"
+          />
+          <Image
+            src="/cloud.svg"
+            alt="Awan"
+            width={800}
+            height={300}
+            className="absolute top-64 -right-48 w-[700px] lg:w-[800px] h-auto opacity-25"
+          />
+        </div>
+
+        <main className="relative z-10 w-full">
+          <Navbar />
+          
+          <HeaderSection />
+
+          <QuickStatsSection />
+
+          <CategoryFilterSection
+            categories={categories}
+            currentCategory={currentCategory}
+            setCurrentCategory={setCurrentCategory}
+          />
+
+          <StoriesGridSection
+            stories={filteredStories}
+            setSelectedStory={setSelectedStory}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+
+          <VideoSection />
+          
+          <ResourceGuidesSection />
+
+          <CtaSection />
+          
+        </main>
+
+        {/* Modal tetap di sini karena dikontrol oleh state 'page.tsx' */}
+        <StoryDetailModal
+          selectedStoryId={selectedStory}
           setSelectedStory={setSelectedStory}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
+          stories={inspirationalStories}
         />
 
-        <VideoSection />
-        
-        <ResourceGuidesSection />
-
-        <CtaSection />
-        
-      </main>
-
-      {/* Modal tetap di sini karena dikontrol oleh state 'page.tsx' */}
-      <StoryDetailModal
-        selectedStoryId={selectedStory}
-        setSelectedStory={setSelectedStory}
-        stories={inspirationalStories}
-      />
-
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }

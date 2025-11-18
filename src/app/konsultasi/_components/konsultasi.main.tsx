@@ -1,8 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar.component";
 import Footer from "@/components/footer.component";
 import Image from "next/image";
+import LoadingScreen from "@/app/_components/loading-screen";
 
 import HeaderSection from "./header.component";
 import TypesSection from "./session-types.component";
@@ -75,56 +77,80 @@ const emergencySection = {
 };
 
 export default function KonsultasiPageMain() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="relative flex flex-col font-sans overflow-x-hidden min-h-screen pt-6">
-      <div
-        className="fixed inset-0 -z-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(180deg, #C6E5F7 20%, #E5F2FF 58%, #C6E5F7 95%)",
-        }}
-      />
+    <>
+      {/* Loading Screen */}
+      {isLoading && (
+        <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
+      )}
 
+      {/* Main Content */}
       <div
-        className="
-          pointer-events-none fixed inset-x-0 -top-44 h-100vh -translate-y-1/2 rounded-full
-          bg-[radial-gradient(circle_at_center,#E8EBD6_0,#E8EBD6_40%,transparent_75%)]
-          blur-3xl opacity-90 -z-10
-        "
-        aria-hidden="true"
-      />
+        className={`
+          relative flex flex-col font-sans overflow-x-hidden min-h-screen pt-6
+          transition-opacity duration-500
+          ${isLoading ? "opacity-0" : "opacity-100"}
+        `}
+      >
+        <div
+          className="fixed inset-0 -z-20"
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, #C6E5F7 20%, #E5F2FF 58%, #C6E5F7 95%)",
+          }}
+        />
 
-      {/* Clouds */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <Image
-          src="/cloud.svg"
-          alt="Awan"
-          width={600}
-          height={200}
-          className="absolute top-20 -left-40 w-[500px] lg:w-[600px] h-auto opacity-20"
+        <div
+          className="
+            pointer-events-none fixed inset-x-0 -top-44 h-100vh -translate-y-1/2 rounded-full
+            bg-[radial-gradient(circle_at_center,#E8EBD6_0,#E8EBD6_40%,transparent_75%)]
+            blur-3xl opacity-90 -z-10
+          "
+          aria-hidden="true"
         />
-        <Image
-          src="/cloud.svg"
-          alt="Awan"
-          width={700}
-          height={250}
-          className="absolute top-40 -right-60 w-[600px] lg:w-[700px] h-auto opacity-25"
-        />
+
+        {/* Clouds */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <Image
+            src="/cloud.svg"
+            alt="Awan"
+            width={600}
+            height={200}
+            className="absolute top-20 -left-40 w-[500px] lg:w-[600px] h-auto opacity-20"
+          />
+          <Image
+            src="/cloud.svg"
+            alt="Awan"
+            width={700}
+            height={250}
+            className="absolute top-40 -right-60 w-[600px] lg:w-[700px] h-auto opacity-25"
+          />
+        </div>
+
+        <main className="relative z-10 w-full">
+          <Navbar />
+
+          <HeaderSection emergencySection={emergencySection} />
+
+          <TypesSection sessionTypes={sessionTypes} />
+
+          <CounselorSection counselors={counselors} />
+
+          <FaqSection />
+        </main>
+
+        <Footer />
       </div>
-
-      <main className="relative z-10 w-full">
-        <Navbar />
-
-        <HeaderSection emergencySection={emergencySection} />
-
-        <TypesSection sessionTypes={sessionTypes} />
-
-        <CounselorSection counselors={counselors} />
-
-        <FaqSection />
-      </main>
-
-      <Footer />
-    </div>
+    </>
   );
 }
